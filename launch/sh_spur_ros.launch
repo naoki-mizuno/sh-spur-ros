@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="sh_spur_ros" type="sh_spur_ros" name="sh_spur_ros"
+        output="screen">
+    <param name="param_file_name" type="string" 
+           value="$(find sh_spur_ros)/param/robot.param"/>
+    <param name="device_name" type="string" value="/dev/ttyUSB0"/>
+  </node>
+</launch>

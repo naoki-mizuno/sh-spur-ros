@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<launch>
+  <param name="/use_sim_time" value="false"/>
+<!--
+  <node pkg="joy" type="joy_node" name="joy_node" output="screen">
+    <param name="autorepeat_rate" value="2"/>
+  </node> 
+
+  <node pkg="quince_teleop" type="quince_teleop" name="quince_teleop" output="screen" >
+    <remap from="quince_vw" to="cmd_vel"/>
+  </node>
+-->
+  <node pkg="tf" type="static_transform_publisher"
+        name="link_to_laser_bloadcaster" 
+        args="0 0 0 0 0 0 /base_link /laser 10"/>
+
+
+  <node pkg="tf" type="static_transform_publisher"
+        name="link_to_base_bloadcaster"
+        args="0 0 0 0 0 0 /base_link /base_frame 10"/>
+
+
+  <node pkg="sh_spur_ros" type="sh_spur_ros" name="sh_spur_ros"
+        output="screen">
+    <param name="param_file_name" type="string" 
+           value="$(find sh_spur_ros)/param/robot.param"/>
+    <param name="device_name" type="string" value="/dev/ttyUSB0"/>
+<!--
+    <remap from="cmd_vel" to="quince_vw"/>
+-->
+  </node>
+
+  <node pkg="hokuyo_node" type="hokuyo_node" name="hokuyo_node"/>
+
+<!--
+  <node pkg="quince_control_vw" type="quince_control_vw" name="quince_control_vw" output="screen" />
+-->
+</launch>
